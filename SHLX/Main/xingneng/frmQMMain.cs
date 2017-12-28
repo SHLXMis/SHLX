@@ -115,104 +115,103 @@ namespace Redsoft.QM
 
         private void 表场检测一ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("表场N", "w_cxn_bc_q326n");
+            Opencxn("表场N");
         }
 
-        private void Opencxn(string sy_name,string windowName)
+        private void Opencxn(string sy_name)
         {
             w_cxn_q000 cxn = new w_cxn_q000();
             cxn.MdiParent = this;
             cxn.Is_sy_name = sy_name;
-            cxn.WindowName = windowName;
             cxn.Show();
             cxn.WindowState = FormWindowState.Maximized;
         }
 
         private void 磁通检测一ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            Opencxn("磁通N", "w_cxn_ct_q330n");
+           
+            Opencxn("磁通N");
         }
 
         private void 高温减磁一ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("高减N", "w_cxn_gj_q039n");
+            Opencxn("高减N");
         }
 
         private void 磁矩检测一ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("磁矩N", "w_cxn_cj_q150n");
+            Opencxn("磁矩N");
         }
 
         private void 高温磁矩ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("高矩N", "w_cxn_cj_q412n");
+            Opencxn("高矩N");
         }
 
         private void 磁体吸力一ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("吸力N", "w_cxn_xl_q329n");
+            Opencxn("吸力N");
         }
 
         private void 高温吸力一ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("高吸N", "w_cxn_gx_q328n");
+            Opencxn("高吸N");
 
         }
 
         private void 角度偏差一ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("角度N", "w_cxn_jd_q141n");
+            Opencxn("角度N");
         }
 
         private void 双面表场一ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("双表N", "w_cxn_sb_q180n");
+            Opencxn("双表N");
         }
 
         private void 表场检则二ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("表场W", "w_cxn_bc_q326w");
+            Opencxn("表场W");
         }
 
         private void 磁通检测二ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Opencxn("磁通W", "w_cxn_ct_q330w");
+            Opencxn("磁通W");
         }
 
         private void 高温减磁二ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("高减W", "w_cxn_gj_q039w");
+            Opencxn("高减W");
         }
 
         private void 磁矩检测二ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("磁矩W", "w_cxn_cj_q150w");
+            Opencxn("磁矩W");
         }
 
         private void 高温磁矩二ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("高矩W", "w_cxn_cj_q412w");
+            Opencxn("高矩W");
         }
 
         private void 磁体吸力二ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("吸力W", "w_cxn_xl_q329w");
+            Opencxn("吸力W");
         }
 
         private void 高温吸力二ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("高吸W", "w_cxn_gx_q328w");
+            Opencxn("高吸W");
         }
 
         private void 角度偏差二ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("角度W", "w_cxn_jd_q141w");
+            Opencxn("角度W");
         }
 
         private void 双面表场二ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Opencxn("双表W", "w_cxn_sb_q180w");
+            Opencxn("双表W");
         }
 
          

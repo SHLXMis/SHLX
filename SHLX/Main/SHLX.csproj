@@ -93,17 +93,17 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="HR\frmHR.cs">
       <SubType>Form</SubType>
@@ -133,7 +133,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="HR\frmHR.resx">
       <DependentUpon>frmHR.cs</DependentUpon>
@@ -182,7 +181,7 @@
     <Compile Include="xingneng\frmQMMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="xingneng\frmQMMain.Designer.cs">
+    <Compile Include="xingneng\frmQMMain.designer.cs">
       <DependentUpon>frmQMMain.cs</DependentUpon>
     </Compile>
     <Compile Include="xingneng\w_cxn_q000.cs">
