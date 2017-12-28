@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
 
 namespace Redsoft
 {
     public class nvo_dw_fun
     {
+        public long il_msg;
         public void f_open0(str_win_dw9 a5wd)
         {
             //第一位 
@@ -149,7 +153,7 @@ namespace Redsoft
               "  from mis_dw_argument WITH (NOLOCK) " +
               "  where user_name1 = :as_username and window1 = :as_winname and dataobject = '' ";
 
-            global.gu_pub1.il_getdate = DateTime.Now;
+            global.gu_pub1.il_getdate = DateTime.Now.Millisecond;
             if (a5dww.detail_color1 != "")
                 f_constr_color0_get(ref a5dww);
             if (a5wd.l_tab3 >= 1 && ls_tab_h != "")
@@ -186,7 +190,6 @@ namespace Redsoft
         public str_sys_dw f_constr_load(string as_username, string as_winname, ref DataWindow adw_dw, ref str_sys_dw astr_dws_g, ref str_sys_dw astr_dws_i)
         {
             //待实现
-            adw_dw.SetGridStyle(as_winname);
             str_sys_dw ret = new str_sys_dw();
             return ret;
         }
@@ -809,6 +812,217 @@ namespace Redsoft
             //    return double(ls_l1 + "." + ls_l2)
             //end if
             return 0;
+        }
+        public string f_get_id_max2(string as_tb_name, bool ab_autocommit)
+        {
+            if (as_tb_name.Trim() == "" || as_tb_name == null) return "";
+            as_tb_name = as_tb_name.Trim().ToLower();
+            string ls_id_max = string.Empty;
+            // 此处声明存储过程名称
+            List<IDbDataParameter> outparas = new List<IDbDataParameter>();
+            SqlParameter para = new SqlParameter("@ls_id_max", SqlDbType.VarChar, 2000);
+            para.Direction = ParameterDirection.Output;
+            outparas.Add(para);
+            List<IDbDataParameter> paras = new List<IDbDataParameter>();
+            para = new SqlParameter("@as_tb_name", as_tb_name);
+            paras.Add(para);
+            DBAccess.ExecSP("id_max_get2", paras, ref outparas);
+            int result = 0;
+            switch (as_tb_name)
+            {
+                case "jg_jgd_h_jgdh":
+                case "jg_jgd_h_ggdh":
+                case "jjg_h_pihao":
+                    return ls_id_max;
+                default:
+                    if (Int32.TryParse(ls_id_max, out result))
+                    {
+                        return ls_id_max;
+                    }
+                    else
+                    {
+                        f_msg(ls_id_max);
+                        return "-1";
+                    }
+                    break;
+            }
+
+            return ls_id_max;
+        }
+        public void f_msg(string as_msg)
+        {
+            long ll_id;
+            switch (il_msg)
+            {
+                case 0:
+                    MessageBox.Show(as_msg, "提示");
+                    break;
+                case 1:
+                    ll_id = Convert.ToInt64(f_get_id_max2("xxzx_baoxiu", true));
+                    if (ll_id <= 0)
+                    {
+                        MessageBox.Show(as_msg, "提示");
+                        return;
+                    }
+                    string sql = string.Format(@"
+		insert into xxzx_baoxiu (xxzx_id,tel_com,riqi_baoxiu,wtms,baoxiuren
+			,ip,lrr,lrsj)
+		values ( {0}, '程序修改', getdate(), '{1}', '{2}'
+			, '{3}', '{4}', getdate()) ;", ll_id, as_msg, global.g5_sys.truename, global.g5_sys.ip, global.g5_sys.app_name);
+                    DBAccess.ExecuteSql(sql);
+                    break;
+                case 2:
+                    ll_id = Convert.ToInt64(f_get_id_max2("xxzx_baoxiu", true));
+                    if (ll_id <= 0)
+                    {
+                        MessageBox.Show(as_msg, "提示");
+                        return;
+                    }
+                    sql = string.Format(@"
+		insert into xxzx_baoxiu (xxzx_id,tel_com,riqi_baoxiu,wtms,baoxiuren
+			,ip,lrr,lrsj)
+		values ( {0}, '程序修改', getdate(), '{1}', '{2}'
+			, '{3}', '{4}', getdate()) ;", ll_id, as_msg, global.g5_sys.truename, global.g5_sys.ip, global.g5_sys.app_name);
+                    DBAccess.ExecuteSql(sql);
+                    MessageBox.Show(as_msg, "提示");
+                    break;
+            }
+        }
+        public void fe_encode2(ref string as_logid, ref string as_psw, string as_app_name, string as_cusername, string as_ip, string as_mac, string as_hostname)
+        {
+            string ls_return = string.Empty;
+            long ll_pass_ts;
+            bool lb_sql = false;
+            List<IDbDataParameter> outparas = new List<IDbDataParameter>();
+            SqlParameter para = new SqlParameter("@ls_return", SqlDbType.VarChar, 2000);
+            para.Direction = ParameterDirection.Output;
+            outparas.Add(para);
+            List<IDbDataParameter> paras = new List<IDbDataParameter>();
+            para = new SqlParameter("@app", as_app_name);
+            paras.Add(para);
+            para = new SqlParameter("@user_win", as_cusername);
+            paras.Add(para);
+            para = new SqlParameter("@ip", as_ip);
+            paras.Add(para);
+            para = new SqlParameter("@mac", as_mac);
+            paras.Add(para);
+            para = new SqlParameter("@hostname", as_hostname);
+            paras.Add(para);
+            Dictionary<string, string> dict = DBAccess.ExecSP("mis_log_pro", paras, ref outparas);
+            ls_return = dict["@ls_return"];
+            lb_sql = true;
+
+            if (lb_sql)
+            {
+            }
+            else
+            {
+                as_logid = ""; ;
+                as_psw = "";
+                global.gu_dw1.f_msg("返回值：" + ls_return);
+                return;
+            }
+
+            switch (ls_return)
+            {
+                case "windows":
+                    as_logid = "";
+                    as_psw = "";
+                    global.gu_dw1.f_msg("2你的计算机的windows登录用户名(" + as_cusername + ")在系统中没有注册!~r~n请与信息部联系！");
+                    return;
+                    break;
+                case "hostname":
+                    as_logid = "";
+                    as_psw = "";
+                    global.gu_dw1.f_msg("3你的笔记本在系统中没有注册!~r~n请与信息部联系！");
+                    return;
+                case "notebook":
+                    as_logid = "";
+                    as_psw = "";
+                    global.gu_dw1.f_msg("4你的笔记本在系统中没有注册!~r~n请与信息部联系！");
+                    return;
+                case "computer":
+                    as_logid = "";
+                    as_psw = "";
+                    global.gu_dw1.f_msg("5你的计算机在系统中没有注册!~r~n请与信息部联系！");
+                    return;
+                case "day200":
+                    as_logid = "";
+                    as_psw = "";
+                    global.gu_dw1.f_msg("6你的计算机或用户名在2天内登录超过200次了!~r~n请与信息部联系！");
+                    return;
+                case "day30":
+                    as_logid = "";
+                    as_psw = "";
+                    global.gu_dw1.f_msg("7你的计算机或用户名在30天内错误登录超过30次了!\r~n请与信息部联系！");
+                    return;
+                case "minute21.6":
+                    as_logid = "";
+                    as_psw = "";
+                    global.gu_dw1.f_msg("8你的计算机或用户名已被锁定，请在20分钟后登录!");
+                    return;
+                default:
+                    string[] strs = ls_return.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (ls_return.Substring(0, 3) == "异常：")
+                    {
+                        global.gu_dw1.f_msg("888你的计算机异常，请找信息部确认！\r\n" + ls_return);
+                        return;
+                    }
+                    if (strs.Length <= 1)
+                    {
+                        string sql = string.Format(@"
+			insert into mis_log_tb1 (app,user_win,ip,mac,hostname,lrsj)
+			values ('{0}' + '非法1','{1}','{2}','{3}','{4}',getdate());", as_app_name, as_cusername, as_ip, as_mac, as_hostname);
+                        DBAccess.ExecuteSql(sql);
+                        f_msg("9你的计算机在进行非法操作，请立刻停止！");
+                        return;
+                    }
+                    as_logid = strs[0];
+                    //string str = ls_return.Substring(0, as_logid.Length + 2);
+                    //ls_return = ls_return.Replace(str, "");
+                    if (strs.Length<=2)
+                    {
+                        string sql = string.Format(@"
+			insert into mis_log_tb1 (app,user_win,ip,mac,hostname,lrsj)
+			values ('{0}' + '非法2','{1}','{2}','{3}','{4}',getdate());", as_app_name, as_cusername, as_ip, as_mac, as_hostname);
+                        DBAccess.ExecuteSql(sql);
+                        f_msg("10你的计算机在进行非法操作，请立刻停止！");
+                        return;
+                    }
+                    as_psw = strs[1];
+                    if (ls_return.Length - as_psw.Length <= 2)
+                    {
+                        string sql = string.Format(@"
+			insert into mis_log_tb1 (app,user_win,ip,mac,hostname,lrsj)
+			values ('{0}' + '非法3','{1}','{2}','{3}','{4}',getdate());", as_app_name, as_cusername, as_ip, as_mac, as_hostname);
+                        DBAccess.ExecuteSql(sql);
+                        f_msg("11你的计算机在进行非法操作，请立刻停止！");
+                        return;
+                    }
+                    ls_return = strs[2];
+                    if (ls_return.Length != 60)
+                    {
+                        string sql = string.Format(@"
+			insert into mis_log_tb1 (app,user_win,ip,mac,hostname,lrsj)
+			values ('{0}' + '非法4','{1}','{2}','{3}','{4}',getdate());", as_app_name, as_cusername, as_ip, as_mac, as_hostname);
+                        DBAccess.ExecuteSql(sql);
+                        f_msg("12你的计算机在进行非法操作，请立刻停止！");
+                        return;
+                    }
+                    if (as_psw.Length != 60)
+                    {
+                        string sql = string.Format(@"
+			insert into mis_log_tb1 (app,user_win,ip,mac,hostname,lrsj)
+			values ('{0}' + '非法5','{1}','{2}','{3}','{4}',getdate());", as_app_name, as_cusername, as_ip, as_mac, as_hostname);
+                        DBAccess.ExecuteSql(sql);
+                        f_msg("13你的计算机在进行非法操作，请立刻停止！");
+                        return;
+                    }
+                    ls_return = global.gu_pub1.fe_wf(ls_return, global.gu_pub1.is_pswkey, false);
+                    as_psw = global.gu_pub1.fe_wf(as_psw, ls_return, false);
+                    //global.g5_sys.connStr = string.Format(ConfigurationManager.ConnectionStrings[1].ConnectionString, as_ip, global.g5_sys., ls_loginid, ls_password);
+                    break;
+            }
         }
     }
 }

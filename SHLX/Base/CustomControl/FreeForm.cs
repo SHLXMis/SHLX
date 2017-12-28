@@ -89,7 +89,7 @@ namespace Redsoft
                     sql = dw.Sql.Replace(":" + args[i].Name, "'" + s + "'");
                 i++;
             }
-            MAction action = new MAction(sql);
+            MAction action = new MAction(sql,global.g5_sys.connStr);
             DataTable dt= action.Select().ToDataTable();
             this.Controls.Add(dw.GetPanel);
             Common.SetUIValue(dt, this.Controls[0]);
@@ -192,7 +192,7 @@ namespace Redsoft
         {
             if (rowState == RowStatus.Add)
             {
-                using (MAction action = new MAction(TableName))
+                using (MAction action = new MAction(TableName,global.g5_sys.connStr))
                 {
                     //收集数据
 

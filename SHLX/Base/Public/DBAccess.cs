@@ -10,9 +10,10 @@ namespace Redsoft
 {
     public class DBAccess
     {
-        public static void ExecSP(string procName, List<IDbDataParameter> paras, ref List<IDbDataParameter> outparas)
+        public static Dictionary<string, string> ExecSP(string procName, List<IDbDataParameter> paras, ref List<IDbDataParameter> outparas)
         {
-            MAction action = new MAction("login_user");
+            Dictionary<string, string> kvDict = new Dictionary<string, string>();
+            MAction action = new MAction("mis_ver", global.g5_sys.connStr);
 
             SqlConnection conn = new SqlConnection(action.ConnectionString);
             conn.Open();
@@ -31,10 +32,12 @@ namespace Redsoft
                 for (int i = 0; i < outparas.Count; i++)
                 {
                     sqlCommand.Parameters.Add(outparas[i]);
-
                 }
                 sqlCommand.ExecuteNonQuery();
-
+                for (int i = 0; i < outparas.Count; i++)
+                {
+                    kvDict.Add(outparas[i].ParameterName, outparas[i].Value.ToString());
+                }
             }
             catch
             {
@@ -45,11 +48,11 @@ namespace Redsoft
 
                 conn.Close();
             }
-
+            return kvDict;
         }
-        public static DataSet Query(string sql)
+        public static DataSet Query(string sql, string tableName = "login_user")
         {
-            MAction action = new MAction("login_user");
+            MAction action = new MAction(tableName, global.g5_sys.connStr);
             SqlConnection mySql = new SqlConnection(action.ConnectionString);
             SqlDataAdapter mySqlDataAdapter = new SqlDataAdapter(sql, mySql);
             mySql.Open();
@@ -57,10 +60,19 @@ namespace Redsoft
             mySqlDataAdapter.Fill(ds, "Table1");
             return ds;
         }
+        public static void ExecuteSql(string sql)
+        {
+            MAction action = new MAction("login_user", global.g5_sys.connStr);
+            SqlConnection mySql = new SqlConnection(action.ConnectionString);
+            mySql.Open();
+            SqlCommand cmd = new SqlCommand(sql, mySql);
+            cmd.ExecuteNonQuery();
+            mySql.Close();
+        }
         public static string ExecSP(string procName, List<IDbDataParameter> paras)
         {
             string result = string.Empty;
-            MAction action = new MAction("login_user");
+            MAction action = new MAction("login_user", global.g5_sys.connStr);
 
             SqlConnection conn = new SqlConnection(action.ConnectionString);
             conn.Open();
@@ -98,7 +110,7 @@ namespace Redsoft
         public static DataRow Query(string sql, List<IDbDataParameter> paras)
         {
             DataRow result;
-            MAction action = new MAction("login_user");
+            MAction action = new MAction("login_user", global.g5_sys.connStr);
 
             SqlConnection conn = new SqlConnection(action.ConnectionString);
             conn.Open();

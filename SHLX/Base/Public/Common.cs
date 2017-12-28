@@ -12,6 +12,9 @@ using System.IO;
 using Aspose.Cells;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Management;
+using System.Net;
+using System.Net.NetworkInformation;
 
 namespace Redsoft
 {
@@ -116,7 +119,7 @@ namespace Redsoft
                 }
             }
         }
-        public static void GetUIValue(MAction action, DataGridViewRow  r)
+        public static void GetUIValue(MAction action, DataGridViewRow r)
         {
             for (int i = 0; i < r.DataGridView.Columns.Count; i++)
             {
@@ -124,7 +127,7 @@ namespace Redsoft
                 string text = Common.GetString(r.Cells[i].Value);
 
                 action.Set(r.DataGridView.Columns[i].Name, text);
-    
+
             }
         }
         public static string CheckValid(MAction action, Control panel1, RowStatus rowState, ErrorProvider ep)
@@ -214,7 +217,7 @@ namespace Redsoft
             sql += " group by " + colName;
 
             //DataSet ds = DBAccess.Query(sql);
-            using (MAction action = new MAction(sql))
+            using (MAction action = new MAction(sql,global.g5_sys.connStr))
             {
                 DataTable dt = action.Select().ToDataTable();
                 combo.DataSource = dt;
@@ -235,7 +238,7 @@ namespace Redsoft
                 sql += " where " + where;
             if (order != "")
                 sql += " order by " + order;
-            using (MAction action = new MAction(sql))
+            using (MAction action = new MAction(sql,global.g5_sys.connStr))
             {
                 System.Data.DataTable dt = action.Select().ToDataTable();
                 combo.DataSource = dt;
@@ -398,7 +401,7 @@ namespace Redsoft
                         if (ls_return != "0浏览")
                             ls_return = "0浏览," + ls_return;
 
-               // as_gnqx = ls_return.Split(',');
+                // as_gnqx = ls_return.Split(',');
                 global.gu_pub1.f_s_listtoarray(ls_return, ",", ref as_gnqx);
                 return_value = as_gnqx.Length;
                 List<string> b = as_gnqx.ToList();
@@ -435,6 +438,69 @@ namespace Redsoft
             DateTime dtStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
             DateTime newTime = dtStart.AddSeconds(unix);
             return newTime;
-        } 
+        }
+
+        public static string GetMacAddress()
+        {
+            try
+            {
+                //获取网卡硬件地址
+                string mac = "";
+                ManagementClass mc = new ManagementClass("Win32_NetworkAdapterConfiguration");
+                ManagementObjectCollection moc = mc.GetInstances();
+                foreach (ManagementObject mo in moc)
+                {
+                    if ((bool)mo["IPEnabled"] == true)
+                    {
+                        mac = mo["MacAddress"].ToString();
+                        break;
+                    }
+                }
+                moc = null;
+                mc = null;
+                return mac;
+            }
+            catch
+            {
+                return "unknow";
+            }
+        }
+
+        public static string[] GetIP()   //获取本地IP
+        {
+            IPHostEntry ipHost = Dns.Resolve(Dns.GetHostName());
+            ipHost.AddressList.ToArray();
+            List<string> ipList = new List<string>();
+            foreach (IPAddress ipAddr in ipHost.AddressList)
+            {
+                ipList.Add(ipAddr.ToString());
+            }
+            return ipList.ToArray();
+        }
+
+        public static string GetMACByIP(string strIp)
+        {
+            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+            //构造Ping实例
+            Ping pingSender = new Ping();
+            //Ping选项设置
+            PingOptions options = new PingOptions();
+            options.DontFragment = true;
+            //测试数据
+            string data = "test data abcabc";
+            byte[] buffer = Encoding.ASCII.GetBytes(data);
+            //设置超时时间
+            int timeout = 120;
+            //调用同步send方法发送数据，将返回结果保存至PingReply实例
+            PingReply reply = pingSender.Send(strIp, timeout, buffer, options);
+            if (reply.Status == IPStatus.Success)
+            {
+                foreach (NetworkInterface adapter in adapters)
+                {
+                    return adapter.GetPhysicalAddress().ToString();
+                }
+            }
+            return string.Empty;
+        }
     }
 }

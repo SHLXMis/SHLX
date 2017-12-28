@@ -85,7 +85,7 @@ namespace Redsoft.HR
         {
             tabControl1.SelectedIndex = 1;
             MDataTable dt;
-            MAction action = new MAction("hr_qingjia_h");
+            MAction action = new MAction("hr_qingjia_h",global.g5_sys.connStr);
             dt = action.Select();
             List<Panel> parents = new List<Panel>();
             parents.Add(panel1);
@@ -96,13 +96,13 @@ namespace Redsoft.HR
 
         private void toolPrint_Click(object sender, EventArgs e)
         {
-            MAction action = new MAction("hr_qingjia_h");
+            MAction action = new MAction("hr_qingjia_h",global.g5_sys.connStr);
             
         }
 
         private void toolAdd_Click(object sender, EventArgs e)
         {
-            MAction action = new MAction("hr_qingjia_h");
+            MAction action = new MAction("hr_qingjia_h",global.g5_sys.connStr);
             action.BeginTransation();
             action.Set("qj_id", 1672);
             action.Set("nian", "2017-11-08");

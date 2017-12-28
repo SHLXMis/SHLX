@@ -160,7 +160,7 @@ namespace Redsoft
             int count;
             try
             {
-                using (MAction action = new MAction(grid.Sql))
+                using (MAction action = new MAction(grid.Sql,global.g5_sys.connStr))
                 {
                     if (hidePager)
                         pagerControl1.PageSize = 1000;
@@ -278,7 +278,7 @@ namespace Redsoft
             }
             string col = comboCol.SelectedValue.ToString();
             IGrid grid = (IGrid)Assembly.Load("BaseData").CreateInstance("Redsoft." + dataObject);
-            MAction action = new MAction(grid.Sql);
+            MAction action = new MAction(grid.Sql,global.g5_sys.connStr);
             if (!action.Data.Columns.Contains(col))
                 return;
             SqlDbType dbtype = action.Data.Columns[col].SqlType;
@@ -360,7 +360,7 @@ namespace Redsoft
         private void comboCol_SelectedIndexChanged(object sender, EventArgs e)
         {
             IGrid grid = (IGrid)Assembly.Load("BaseData").CreateInstance("Redsoft." + dataObject);
-            MAction action = new MAction(grid.Sql);
+            MAction action = new MAction(grid.Sql,global.g5_sys.connStr);
             comboRel.Items.Clear();
             string col = comboCol.SelectedValue.ToString();
             if (!action.Data.Columns.Contains(col))
@@ -451,7 +451,7 @@ namespace Redsoft
         private void btnOutput_Click(object sender, EventArgs e)
         {
             IGrid grid = (IGrid)Assembly.Load("BaseData").CreateInstance("Redsoft." + dataObject);
-            MAction action=new  MAction(grid.Sql);
+            MAction action=new  MAction(grid.Sql,global.g5_sys.connStr);
             if (pagerControl1.RecordCount > 50000)
             {
                 MessageBox.Show("记录数超过5万行，请分开导出！");
@@ -486,7 +486,7 @@ namespace Redsoft
         }
         public string DeleteRow()
         {
-            MAction action=new MAction(dataObject);
+            MAction action=new MAction(dataObject,global.g5_sys.connStr);
             string id = dataGridView1.CurrentRow.Cells[IdCol].Value.ToString();
             action.Fill("" + IdCol + "=" + id + "");
             if (action.Delete())

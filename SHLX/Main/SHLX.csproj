@@ -56,20 +56,19 @@
   <ItemGroup>
     <Reference Include="Aspose.Cells, Version=4.4.3.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Aspose.Cells.dll</HintPath>
+      <HintPath>..\..\..\GMIS2008\BusinessConsole\bin\Debug\Aspose.Cells.dll</HintPath>
     </Reference>
     <Reference Include="Aspose.Words, Version=14.2.0.0, Culture=neutral, PublicKeyToken=00725b1ceb58d0a9, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\Aspose.Words.dll</HintPath>
+      <HintPath>..\..\..\GMIS2008\BusinessConsole\bin\Debug\Aspose.Words.dll</HintPath>
     </Reference>
     <Reference Include="CYQ.Data, Version=5.7.7.7, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\CYQ.Data.dll</HintPath>
+      <HintPath>..\..\..\C#框架研究\cyqdata-master\cyqdata-master\bin\Debug\CYQ.Data.dll</HintPath>
     </Reference>
     <Reference Include="Interop.Excel, Version=1.5.0.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>..\Lib\Interop.Excel.dll</HintPath>
+      <HintPath>..\..\..\GMIS2008\BusinessConsole\bin\Debug\Interop.Excel.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
