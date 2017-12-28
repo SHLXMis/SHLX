@@ -35,7 +35,6 @@ D:\MyProduct\SHLX\SHLX\Base\obj\Debug\Base.csprojResolveAssemblyReference.cache
 D:\项目\SHLX\SHLX\Base\obj\Debug\Base.csprojResolveAssemblyReference.cache
 D:\项目\三环乐喜\SHLX\Base\bin\Debug\Base.dll
 D:\项目\三环乐喜\SHLX\Base\bin\Debug\Base.pdb
-D:\项目\三环乐喜\SHLX\Base\obj\Debug\Base.csprojResolveAssemblyReference.cache
 D:\项目\三环乐喜\SHLX\Base\obj\Debug\Redsoft.DataWindow.resources
 D:\项目\三环乐喜\SHLX\Base\obj\Debug\Redsoft.FreeForm.resources
 D:\项目\三环乐喜\SHLX\Base\obj\Debug\Redsoft.Grid.resources
