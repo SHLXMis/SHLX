@@ -321,6 +321,7 @@ namespace Redsoft
             }
             else
             {
+                 
                 IList<NameValue> args = grid.GetArguments();
                 string sql = grid.Sql;
 
@@ -430,6 +431,7 @@ namespace Redsoft
             }
             else
             {
+                
                 IList<NameValue> args = grid.GetArguments();
                 string sql = "";
                 //参数替换
@@ -581,7 +583,7 @@ namespace Redsoft
                         pagerControl1.PageSize = 1000;
                     MDataTable dt = action.Select(pagerControl1.PageIndex, pagerControl1.PageSize, condition, out count);
 
-
+                   
                     dataGridView1.Rows.Clear();
                     if (dataGridView1.Columns.Count == 0)
                     {
@@ -619,6 +621,65 @@ namespace Redsoft
             {
 
             }
+        }
+
+        public void SetGridStyle(string windowName)
+        {
+            dataGridView1.EnableHeadersVisualStyles = false;
+            MAction action = new MAction("mis_dw_argument");
+            DataTable dt= action.Select("user_name1='"+ global.g5_sys.username +"' and window1='"+ windowName +"' and dataobject='"+ this.dataObject +"'").ToDataTable();
+            if (dt.Rows.Count == 0)
+                dt = action.Select("user_name1='" + global.g5_sys.username + "' and window1='" + windowName + "'").ToDataTable();
+            if (dt.Rows.Count == 0)
+                dt = action.Select("user_name1='" + global.g5_sys.username + "'").ToDataTable();
+
+            if (dt.Rows.Count == 0)
+            {
+                
+                dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(193, 205, 205);
+                dataGridView1.DefaultCellStyle.BackColor = Color.FromArgb(207, 207, 207);
+                dataGridView1.GridColor = Color.White;
+                dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(255, 255, 224);
+            }
+            else
+            {
+                long headercolor = Common.GetLong(dt.Rows[0]["header_color"]);
+                if (headercolor != 0)
+                    dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromWin32((int)headercolor);
+                long headerfontcolor = Common.GetLong(dt.Rows[0]["header_fontcolor"]);
+                if (headerfontcolor != 0)
+                    dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = ColorTranslator.FromWin32((int)headerfontcolor);
+                long headerfontsize = Common.GetLong(dt.Rows[0]["header_fontsize"]);
+                string headerfontfamily = Common.GetString(dt.Rows[0]["header_fontface"]);
+                if (headerfontsize != 0 && headerfontfamily!="")
+                    dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font(headerfontfamily, Math.Abs(headerfontsize));
+
+                long detailfontsize = Common.GetLong(dt.Rows[0]["detail_fontsize"]);
+                string detailfontfamily = Common.GetString(dt.Rows[0]["detail_fontface"]);
+                if (detailfontsize != 0 && detailfontfamily != "")
+                    dataGridView1.DefaultCellStyle.Font = new Font(detailfontfamily, Math.Abs(detailfontsize));
+                long detailheight = Common.GetLong(dt.Rows[0]["detail_height"]);
+                dataGridView1.RowTemplate.Height =(int) detailheight / 4;
+                if (Common.GetString(dt.Rows[0]["dw_2_3"]) == "2")
+                {
+                   //奇偶列
+                    long detailcolor1 = Common.GetLong(dt.Rows[0]["detail_color1"]);
+                    if (detailcolor1 != 0)
+                        dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromWin32((int)detailcolor1);
+                    long detailfontcolor1 = Common.GetLong(dt.Rows[0]["detail_fontcolor1"]);
+                    if (detailfontcolor1 != 0)
+                        dataGridView1.AlternatingRowsDefaultCellStyle.ForeColor = ColorTranslator.FromWin32((int)detailfontcolor1);
+
+                    long detailcolor2 = Common.GetLong(dt.Rows[0]["detail_color2"]);
+                    if (detailcolor2 != 0)
+                        dataGridView1.DefaultCellStyle.BackColor = ColorTranslator.FromWin32((int)detailcolor2);
+                    long detailfontcolor2 = Common.GetLong(dt.Rows[0]["detail_fontcolor2"]);
+                    if (detailfontcolor2 != 0)
+                        dataGridView1.DefaultCellStyle.ForeColor = ColorTranslator.FromWin32((int)detailfontcolor2);
+
+                }
+            }
+            
         }
         void pagerControl1_OnPageChanged(object sender, EventArgs e)
         {

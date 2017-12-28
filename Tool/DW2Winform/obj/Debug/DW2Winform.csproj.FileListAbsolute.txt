@@ -11,3 +11,5 @@ D:\MyProduct\SHLX\Tool\DW2Winform\bin\Debug\CYQ.Data.dll
 D:\MyProduct\SHLX\Tool\DW2Winform\bin\Debug\Base.dll
 D:\MyProduct\SHLX\Tool\DW2Winform\bin\Debug\Base.pdb
 D:\MyProduct\SHLX\Tool\DW2Winform\obj\Debug\DW2Winform.csprojResolveAssemblyReference.cache
+D:\SHLX\Tool\DW2Winform\obj\Debug\DW2Winform.exe
+D:\SHLX\Tool\DW2Winform\obj\Debug\DW2Winform.pdb

@@ -186,6 +186,7 @@ namespace Redsoft
         public str_sys_dw f_constr_load(string as_username, string as_winname, ref DataWindow adw_dw, ref str_sys_dw astr_dws_g, ref str_sys_dw astr_dws_i)
         {
             //待实现
+            adw_dw.SetGridStyle(as_winname);
             str_sys_dw ret = new str_sys_dw();
             return ret;
         }
