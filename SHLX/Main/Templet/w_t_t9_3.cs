@@ -34,7 +34,7 @@ namespace Redsoft
             {
                 i5dww = new str_sys_dw();
                 i5wd = new str_win_dw9();
-                global.g5_sys.s_object = this.Name;
+                global.g5_sys.s_object = windowName;
                 i5wd.win0 = this;
                 global.gu_dw1.f_open0(i5wd);
                 ue_open0();
@@ -290,14 +290,14 @@ namespace Redsoft
         }
         public virtual void ue_constructor_load()
         {
-            global.gu_dw1.f_constr_win0(global.g5_sys.username, this.Name, ref i5dww, ref i5wd);
+            global.gu_dw1.f_constr_win0(global.g5_sys.username, windowName, ref i5dww, ref i5wd);
             i5wd.l_focuschanged = 888;
             long ll_i;
             for (ll_i = 1; ll_i <= 32; ll_i++)
             {
                 if (i5wd.b_dw0[ll_i])
                 {
-                    global.gu_dw1.f_constr_load(global.g5_sys.username, this.Name, ref i5wd.dw0[ll_i], ref global.g5_dws2, ref i5dww);
+                    global.gu_dw1.f_constr_load(global.g5_sys.username, windowName, ref i5wd.dw0[ll_i], ref global.g5_dws2, ref i5dww);
                     if (ll_i <= 8)
                     {
                         if (i5wd.d_tab_h[ll_i] <= 0.05 || i5wd.d_tab_h[ll_i] >= 0.95)
@@ -752,7 +752,7 @@ namespace Redsoft
             }
             //以上为临时代码
 
-            global.g5_sys.s_object = i5wd.win0.Name + this.Name;
+            global.g5_sys.s_object = i5wd.win0.Name + windowName;
             if (tab_t1.SelectedIndex >= 0)
                 i5wd.l_newindex = tab_t1.SelectedIndex + 1;
             if (!this.Visible)
@@ -1127,7 +1127,7 @@ namespace Redsoft
         public void ue_constructor_save()
         {
             string ls_tab_h, ls_window1;
-            ls_window1 = this.Name;
+            ls_window1 =windowName;
             ls_tab_h = global.gu_pub1.f_s_arraytolista(i5wd.d_tab_h, ",");
             //update mis_dw_argument set colname = :ls_tab_h,lrsj=getdate()
             //        where user_name1 = :g5_sys.username and window1 = :ls_window1 and dataobject = '' ;
@@ -1140,7 +1140,7 @@ namespace Redsoft
             for (ll_i = 1; ll_i <= 32; ll_i++)
             {
                 if (i5wd.b_dw0[ll_i])
-                    global.gu_dw1.f_constr_save(global.g5_sys.username, this.Name, i5wd.dw0[ll_i]);
+                    global.gu_dw1.f_constr_save(global.g5_sys.username,windowName, i5wd.dw0[ll_i]);
                 else
                 {
                     if (ll_i < 8)
@@ -1430,7 +1430,7 @@ namespace Redsoft
                 return;
             if (wtf_tab3_ins_del_pre() == -1)
                 return;
-            global.g5_sys.s_object = i5wd.win0.Name + this.Name;
+            global.g5_sys.s_object = i5wd.win0.Name + windowName;
             if (ue_inst_pre() == -1)
                 return;
             long ll_newrow = 0;
@@ -1589,7 +1589,7 @@ namespace Redsoft
 
             if (wtf_tab3_ins_del_pre() == -1)
                 return;
-            global.g5_sys.s_object = i5wd.win0.Name + this.Name;
+            global.g5_sys.s_object = i5wd.win0.Name + windowName;
             if (ue_delt_pre() == -1)
                 return;
             if (wtf_tab3_delt(17) == -1)
