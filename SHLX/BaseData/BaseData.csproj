@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9D4BDC13-BE00-4F65-B982-0A9B0C3A90C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Redsoft</RootNamespace>
+    <AssemblyName>BaseData</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells, Version=4.4.3.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="CYQ.Data, Version=5.7.7.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\CYQ.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.Excel, Version=1.5.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>..\Lib\Interop.Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Dw_Argument.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="xingneng\d_cxn_h_list_cpbh.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_h_list_cpbh.Designer.cs">
+      <DependentUpon>d_cxn_h_list_cpbh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_h_updt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_h_updt.Designer.cs">
+      <DependentUpon>d_cxn_h_updt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_print_h_list.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_print_h_list.Designer.cs">
+      <DependentUpon>d_cxn_print_h_list.cs</DependentUpon>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q039_b_updt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q039_b_updt.designer.cs">
+      <DependentUpon>d_cxn_q039_b_updt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q141_b_updt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q141_b_updt.designer.cs">
+      <DependentUpon>d_cxn_q141_b_updt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q150_b_updt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q150_b_updt.designer.cs">
+      <DependentUpon>d_cxn_q150_b_updt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q180_b_updt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q180_b_updt.designer.cs">
+      <DependentUpon>d_cxn_q180_b_updt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q326_b_updt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q326_b_updt.Designer.cs">
+      <DependentUpon>d_cxn_q326_b_updt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q328_b_updt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q328_b_updt.Designer.cs" />
+    <Compile Include="xingneng\d_cxn_q329_b_updt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q329_b_updt.Designer.cs" />
+    <Compile Include="xingneng\d_cxn_q330_b_updt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q330_b_updt.Designer.cs" />
+    <Compile Include="xingneng\d_cxn_q412_b_updt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_cxn_q412_b_updt.Designer.cs" />
+    <Compile Include="xingneng\d_jl_h_updt.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="xingneng\d_jl_h_updt.Designer.cs">
+      <DependentUpon>d_jl_h_updt.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Base\Base.csproj">
+      <Project>{77FF855A-4A58-4682-A58D-13B5C7D4F560}</Project>
+      <Name>Base</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="xingneng\d_cxn_h_list_cpbh.resx">
+      <DependentUpon>d_cxn_h_list_cpbh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xingneng\d_cxn_h_updt.resx">
+      <DependentUpon>d_cxn_h_updt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xingneng\d_cxn_print_h_list.resx">
+      <DependentUpon>d_cxn_print_h_list.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xingneng\d_cxn_q039_b_updt.resx">
+      <DependentUpon>d_cxn_q039_b_updt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xingneng\d_cxn_q141_b_updt.resx">
+      <DependentUpon>d_cxn_q141_b_updt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xingneng\d_cxn_q150_b_updt.resx">
+      <DependentUpon>d_cxn_q150_b_updt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xingneng\d_cxn_q180_b_updt.resx">
+      <DependentUpon>d_cxn_q180_b_updt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xingneng\d_cxn_q326_b_updt.resx">
+      <DependentUpon>d_cxn_q326_b_updt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xingneng\d_cxn_q328_b_updt.resx" />
+    <EmbeddedResource Include="xingneng\d_cxn_q329_b_updt.resx" />
+    <EmbeddedResource Include="xingneng\d_cxn_q330_b_updt.resx" />
+    <EmbeddedResource Include="xingneng\d_cxn_q412_b_updt.resx" />
+    <EmbeddedResource Include="xingneng\d_jl_h_updt.resx">
+      <DependentUpon>d_jl_h_updt.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

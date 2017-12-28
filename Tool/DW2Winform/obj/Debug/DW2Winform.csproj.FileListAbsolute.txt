@@ -1,0 +1,13 @@
+D:\MyProduct\SHLX\Tool\DW2Winform\bin\Debug\DW2Winform.exe
+D:\MyProduct\SHLX\Tool\DW2Winform\bin\Debug\DW2Winform.pdb
+D:\MyProduct\SHLX\Tool\DW2Winform\obj\Debug\DW2Winform.Properties.Resources.resources
+D:\MyProduct\SHLX\Tool\DW2Winform\obj\Debug\DW2Winform.csproj.GenerateResource.Cache
+D:\MyProduct\SHLX\Tool\DW2Winform\obj\Debug\DW2Winform.exe
+D:\MyProduct\SHLX\Tool\DW2Winform\obj\Debug\DW2Winform.pdb
+D:\MyProduct\SHLX\Tool\DW2Winform\obj\Debug\DW2Winform.frmMain.resources
+D:\MyProduct\SHLX\Tool\DW2Winform\bin\Debug\Aspose.Cells.dll
+D:\MyProduct\SHLX\Tool\DW2Winform\bin\Debug\Interop.Excel.dll
+D:\MyProduct\SHLX\Tool\DW2Winform\bin\Debug\CYQ.Data.dll
+D:\MyProduct\SHLX\Tool\DW2Winform\bin\Debug\Base.dll
+D:\MyProduct\SHLX\Tool\DW2Winform\bin\Debug\Base.pdb
+D:\MyProduct\SHLX\Tool\DW2Winform\obj\Debug\DW2Winform.csprojResolveAssemblyReference.cache
