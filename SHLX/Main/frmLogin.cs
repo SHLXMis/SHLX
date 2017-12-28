@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using CYQ.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Redsoft
 {
@@ -35,8 +36,11 @@ namespace Redsoft
         private void cmdOk_Click(object sender, EventArgs e)
         {
             Common.InitClass(txtUser.Text);
+            global.g5_sys.connStr = ConfigurationManager.ConnectionStrings[2].ConnectionString;
+#if !DEBUG
             GetSysInfo();
             global.gu_pub1.ue_db();
+#endif
 
             if (txtUser.Text == "")
             {
