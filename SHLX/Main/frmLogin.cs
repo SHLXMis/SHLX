@@ -55,23 +55,26 @@ namespace Redsoft
                 MessageBox.Show("请输入密码，注意区分大小写！");
                 return;
             }
-            //using (MAction action = new MAction("select user_name1,pass,dbo.MD5('" + txtPassword.Text + "') as inputpass from login_user where user_name1='shlx1' ", global.g5_sys.connStr))
-            ////using (MAction action = new MAction("select user_name1,pass,dbo.MD5('" + txtPassword.Text + "') as inputpass from login_user where user_name1='lhf' ", global.g5_sys.connStr))
-            //{
-            //    DataTable dt = action.Select().ToDataTable();
-            //    if (dt.Rows.Count == 0)
-            //    {
-            //        MessageBox.Show("无此账户！");
-            //        return;
-            //    }
-            //    if (dt.Rows[0]["pass"].ToString() !=
-            //        dt.Rows[0]["inputpass"].ToString())
-            //    {
-            //        MessageBox.Show("请输入正确的密码，注意区分大小写！");
-            //        return;
-            //    }
-            //}
-            Login();
+            using (MAction action = new MAction("select user_name1,pass,dbo.MD5('" + txtPassword.Text + "') as inputpass from login_user where user_name1='shlx1' ", global.g5_sys.connStr))
+            //using (MAction action = new MAction("select user_name1,pass,dbo.MD5('" + txtPassword.Text + "') as inputpass from login_user where user_name1='lhf' ", global.g5_sys.connStr))
+            {
+                DataTable dt = action.Select().ToDataTable();
+                if (dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("无此账户！");
+                    return;
+                }
+                if (dt.Rows[0]["pass"].ToString() !=
+                    dt.Rows[0]["inputpass"].ToString())
+                {
+                    MessageBox.Show("请输入正确的密码，注意区分大小写！");
+                    return;
+                }
+            }
+            //Login();
+            this.Hide();
+            frmMain main = new frmMain();
+            main.Show();
         }
 
         private void Login()

@@ -1051,7 +1051,7 @@ namespace Redsoft
         }
         public void wf_str_sys_dws2(string user_name)
         {
-            string sql = @"
+            string sql = string.Format(@"
             	select dw_2_3
 		,header_color
 		,header_fontcolor
@@ -1069,7 +1069,7 @@ namespace Redsoft
 		,detail_fontcolor3
 		,detail_input_bcolorm
 		,dw_color
-	from mis_dw_argument WITH (NOLOCK) where user_name1 = :as_username and window1 = '' and dataobject = ''";
+	from mis_dw_argument WITH (NOLOCK) where user_name1 = '{0}' and window1 = '' and dataobject = ''", user_name);
             DataSet ds = DBAccess.Query(sql);
             if (ds.Tables[0].Rows.Count > 0)
             {
