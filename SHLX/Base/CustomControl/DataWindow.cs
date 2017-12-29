@@ -587,6 +587,7 @@ namespace Redsoft
                     dataGridView1.Rows.Clear();
                     if (dataGridView1.Columns.Count == 0)
                     {
+                        string s;
                         DataGridView dv = grid.GetGrid();
 
                         for (int j = 0; j < dv.Columns.Count; j++)

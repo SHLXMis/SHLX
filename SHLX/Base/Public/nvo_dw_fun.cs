@@ -980,7 +980,7 @@ namespace Redsoft
                     as_logid = strs[0];
                     //string str = ls_return.Substring(0, as_logid.Length + 2);
                     //ls_return = ls_return.Replace(str, "");
-                    if (strs.Length<=2)
+                    if (strs.Length <= 2)
                     {
                         string sql = string.Format(@"
 			insert into mis_log_tb1 (app,user_win,ip,mac,hostname,lrsj)
@@ -1023,6 +1023,78 @@ namespace Redsoft
                     //global.g5_sys.connStr = string.Format(ConfigurationManager.ConnectionStrings[1].ConnectionString, as_ip, global.g5_sys., ls_loginid, ls_password);
                     break;
             }
+        }
+        public int f_sql_filter(string sql)
+        {
+            if (sql == null || sql.Trim() == "")
+            {
+                return 1;
+            }
+            string[] ls_sql_no;
+            ls_sql_no = new string[]{"insert","update","delete","truncate",
+				"exists","execute","exec","char","nchar",
+				"drop","create","alter","rename","declare",
+				"master","model","msdb","tempdb",
+				"grant","revoke",
+				"sp_","xp_","sysobjects","syscolumns","sysusers",
+				"dbcc","backup"};
+
+            sql = sql.ToLower();
+            int ll_i, ll_c;
+            ll_c = ls_sql_no.Length;
+            for (ll_i = 0; ll_i < ll_c; ll_i++)
+            {
+                if (sql.Contains(ls_sql_no[ll_i]))
+                    return 0;
+            }
+            return 1;
+        }
+        public void wf_str_sys_dws2(string user_name)
+        {
+            string sql = @"
+            	select dw_2_3
+		,header_color
+		,header_fontcolor
+		,header_fontsize
+		,header_fontface
+		,header_height
+		,detail_fontsize
+		,detail_fontface
+		,detail_height
+		,detail_color1
+		,detail_color2
+		,detail_color3
+		,detail_fontcolor1
+		,detail_fontcolor2
+		,detail_fontcolor3
+		,detail_input_bcolorm
+		,dw_color
+	from mis_dw_argument WITH (NOLOCK) where user_name1 = :as_username and window1 = '' and dataobject = ''";
+            DataSet ds = DBAccess.Query(sql);
+            if (ds.Tables[0].Rows.Count > 0)
+            {
+                DataRow dr = ds.Tables[0].Rows[0];
+                global.g5_dws2.dw_2_3 = Convert.ToString(dr[0]);
+                global.g5_dws2.header_color = Convert.ToString(dr[1]);
+                global.g5_dws2.header_fontcolor = Convert.ToString(dr[2]);
+                global.g5_dws2.header_fontsize = Convert.ToString(dr[3]);
+                global.g5_dws2.header_fontface = Convert.ToString(dr[4]);
+                global.g5_dws2.header_height = Convert.ToString(dr[5]);
+                global.g5_dws2.detail_fontsize = Convert.ToString(dr[6]);
+                global.g5_dws2.detail_fontface = Convert.ToString(dr[7]);
+                global.g5_dws2.detail_height = Convert.ToString(dr[8]);
+                global.g5_dws2.detail_color1 = Convert.ToString(dr[9]);
+                global.g5_dws2.detail_color2 = Convert.ToString(dr[10]);
+                global.g5_dws2.detail_color3 = Convert.ToString(dr[11]);
+                global.g5_dws2.detail_fontcolor1 = Convert.ToString(dr[12]);
+                global.g5_dws2.detail_fontcolor2 = Convert.ToString(dr[13]);
+                global.g5_dws2.detail_fontcolor3 = Convert.ToString(dr[14]);
+                global.g5_dws2.detail_input_bcolorm = Convert.ToString(dr[15]);
+                global.g5_dws2.dw_color = Convert.ToString(dr[16]);
+            }
+            global.gu_dw1.f_constr_color0_get(ref global.g5_dws2);
+            if (global.g5_dws2.detail_color1 == null || global.g5_dws2.detail_color1 == "")
+                global.g5_dws2 = global.g5_dws1;
         }
     }
 }

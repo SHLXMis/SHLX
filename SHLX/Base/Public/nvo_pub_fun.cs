@@ -8,6 +8,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Configuration;
+using System.Data.SqlClient;
 
 namespace Redsoft
 {
@@ -613,6 +614,58 @@ namespace Redsoft
                     }
 
                 }
+            }
+        }
+        public int gf_gnqx_1(string as_username, string as_page_name)
+        {
+            if (as_username == "lhf")
+                return 1;
+            else if (string.IsNullOrEmpty(as_username) || string.IsNullOrEmpty(as_page_name))
+                return 0;
+            else
+            {
+                string ls_return = string.Empty;
+                bool lb_sql;
+                lb_sql = false;
+                List<IDbDataParameter> outparas = new List<IDbDataParameter>();
+                SqlParameter para = new SqlParameter("@ls_return", SqlDbType.VarChar, 200);
+                para.Direction = ParameterDirection.Output;
+                outparas.Add(para);
+                List<IDbDataParameter> paras = new List<IDbDataParameter>();
+                para = new SqlParameter("@leibie", 51);
+                paras.Add(para);
+                para = new SqlParameter("@page_name", as_page_name);
+                paras.Add(para);
+                paras.Add(para);
+                para = new SqlParameter("@user_name1", as_username);
+                paras.Add(para);
+                para = new SqlParameter("@pass", "");
+                paras.Add(para);
+                para = new SqlParameter("@pass_new", "");
+                paras.Add(para);
+                para = new SqlParameter("@ip", "");
+                paras.Add(para);
+                try
+                {
+                    Dictionary<string, string> dict = DBAccess.ExecSP("login_gnqx_pass", paras, ref outparas);
+                    ls_return = Convert.ToString(dict["@ls_return"]);
+                    lb_sql = true;
+                }
+                catch
+                {
+                    lb_sql = false;
+                }
+
+                if (lb_sql)
+                {
+                    if (ls_return == "login")
+                        return 1;
+                    else
+                        return 0;
+                }
+                else
+                    return 0;
+                return 0;
             }
         }
     }

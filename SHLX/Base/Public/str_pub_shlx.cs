@@ -7,15 +7,15 @@ namespace Redsoft
 {
     public class str_pub_shlx
     {
-      public static  string		factory;
-      public static string fac;
-      public static string qms1_qms2;
-      public static string desktop_curusers;
-      public static string desktop_allusers;
-      public static string appdata;
-      public static bool chengben;
-      public static string com_bumen;
-      public static string com_chejian;
-      public static string com_leixing;
+        public string factory;
+        public string fac;
+        public string qms1_qms2;
+        public string desktop_curusers;
+        public string desktop_allusers;
+        public string appdata;
+        public bool chengben;
+        public string com_bumen;
+        public string com_chejian;
+        public string com_leixing;
     }
 }

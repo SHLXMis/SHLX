@@ -37,5 +37,6 @@ namespace Redsoft
         public string s_object;
         public string win_ver;
         public string connStr;
+        public string w_pub_init;
     }
 }
