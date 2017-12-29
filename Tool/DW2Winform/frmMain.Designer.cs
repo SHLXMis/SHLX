@@ -85,7 +85,7 @@
             this.txtFileName.Name = "txtFileName";
             this.txtFileName.Size = new System.Drawing.Size(200, 21);
             this.txtFileName.TabIndex = 5;
-            this.txtFileName.Text = "d:\\d_cc_h_ccjy6_updt.srd";
+            this.txtFileName.Text = "D:\\DataWindow转换\\";
             // 
             // label2
             // 
@@ -161,7 +161,7 @@
             this.txtTableDefinePath.Name = "txtTableDefinePath";
             this.txtTableDefinePath.Size = new System.Drawing.Size(322, 21);
             this.txtTableDefinePath.TabIndex = 9;
-            this.txtTableDefinePath.Text = "D:\\MyProduct\\SHLX\\SHLX\\BaseData\\xingneng";
+            this.txtTableDefinePath.Text = "D:\\SHLX\\SHLX\\BaseData\\xingneng";
             // 
             // tabControl1
             // 
