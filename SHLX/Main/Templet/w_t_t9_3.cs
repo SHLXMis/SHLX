@@ -331,13 +331,35 @@ namespace Redsoft
             {
                 case "h":
                     splitContainer1.Panel1.Controls.Add(tab_t1);
+                    splitContainer1.Panel1.Controls.Add(toolBar);
+                    toolBar.Left = splitContainer1.Panel1.Width - toolBar.Width;
+                    toolBar.BringToFront();
+                    toolBar.Top = 0;
+                    toolBar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                     splitContainer2.Panel1.Controls.Add(tab_t3);
+                    splitContainer2.Panel1.Controls.Add(cb_tab3_export);
+                    cb_tab3_export.BringToFront();
+                    cb_tab3_export.Left = splitContainer2.Panel1.Width - cb_tab3_export.Width;
+                    cb_tab3_export.Top = 0;
+                    cb_tab3_export.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+
                     splitContainer2.Panel2.Controls.Add(tab_t5);
                     break;
                 case "v":
                     splitContainer1.Panel1.Controls.Add(splitContainer2);
                     splitContainer2.Panel1.Controls.Add(tab_t1);
+                    splitContainer2.Panel1.Controls.Add(toolBar);
+                    toolBar.BringToFront();
+                    toolBar.Left = splitContainer2.Panel1.Width - toolBar.Width;
+                    toolBar.Top = 0;
+                    toolBar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                     splitContainer2.Panel2.Controls.Add(tab_t3);
+                    splitContainer2.Panel2.Controls.Add(cb_tab3_export);
+                    cb_tab3_export.BringToFront();
+                    cb_tab3_export.Left = splitContainer2.Panel2.Width - cb_tab3_export.Width;
+                    cb_tab3_export.Top = 0;
+                    cb_tab3_export.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+
                     splitContainer1.Panel2.Controls.Add(tab_t5);
                     splitContainer2.Orientation = Orientation.Vertical;
                     break;
@@ -1790,7 +1812,7 @@ namespace Redsoft
 
         private void cb_tab3_export_Click(object sender, EventArgs e)
         {
-            ExcelHelper.GridToExcel(dw_t31.dataGridView1, System.IO.Path.GetTempFileName() + ".xls");
+            ExcelHelper.GridToExcel(i5wd.dw0[tab_t3.SelectedIndex+9 ].dataGridView1, System.IO.Path.GetTempFileName() + ".xls");
         }
     }
 }
