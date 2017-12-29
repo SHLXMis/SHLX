@@ -28,6 +28,10 @@ namespace Redsoft
             string ip = new nvo_pub_fun().uf_sys_ip_shlx_lan();
             global.g5_sys.ip = ip;
             string mac = Common.GetMACByIP(ip);
+            if (mac.Length == 12)
+            {
+                mac = mac.Insert(4, "-").Insert(9, "-");
+            }
             global.g5_sys.mac = mac;
             string hostName = Environment.MachineName;
             global.g5_sys.hostname = hostName;
@@ -41,7 +45,6 @@ namespace Redsoft
             GetSysInfo();
             global.gu_pub1.ue_db();
 #endif
-
             if (txtUser.Text == "")
             {
                 MessageBox.Show("请输入用户登录名");
