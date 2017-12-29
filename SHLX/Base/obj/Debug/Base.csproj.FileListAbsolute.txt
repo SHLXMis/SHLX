@@ -51,7 +51,6 @@ D:\SHLX\SHLX\Base\bin\Debug\Base.dll
 D:\SHLX\SHLX\Base\bin\Debug\Base.pdb
 D:\SHLX\SHLX\Base\bin\Debug\CYQ.Data.dll
 D:\SHLX\SHLX\Base\bin\Debug\CYQ.Data.xml
-D:\SHLX\SHLX\Base\obj\Debug\Base.csprojResolveAssemblyReference.cache
 D:\SHLX\SHLX\Base\obj\Debug\Redsoft.DataWindow.resources
 D:\SHLX\SHLX\Base\obj\Debug\Redsoft.FreeForm.resources
 D:\SHLX\SHLX\Base\obj\Debug\Redsoft.Grid.resources

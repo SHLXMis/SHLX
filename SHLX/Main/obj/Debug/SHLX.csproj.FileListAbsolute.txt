@@ -114,3 +114,4 @@ D:\SHLX\SHLX\Main\obj\Debug\Redsoft.w_t_t9_3.resources
 D:\SHLX\SHLX\Main\obj\Debug\Redsoft.QM.frmQMMain.resources
 D:\SHLX\SHLX\Main\obj\Debug\Redsoft.w_cxn_q000.resources
 D:\SHLX\SHLX\Main\obj\Debug\SHLX.csproj.GenerateResource.Cache
+D:\SHLX\SHLX\Main\obj\Debug\Redsoft.frmModifyPwd.resources

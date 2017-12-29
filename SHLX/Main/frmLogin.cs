@@ -41,7 +41,7 @@ namespace Redsoft
         {
             Common.InitClass(txtUser.Text);
             global.g5_sys.connStr = ConfigurationManager.ConnectionStrings[2].ConnectionString;
-#if DEBUG
+#if !DEBUG
             GetSysInfo();
             global.gu_pub1.ue_db();
 #endif
