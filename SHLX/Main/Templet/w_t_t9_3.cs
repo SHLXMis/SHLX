@@ -247,6 +247,7 @@ namespace Redsoft
                 //if (i5wd.s_gjz_parm.Substring(0, 5) != "@@@@@")
                 global.gu_dw1.f_sql_retrieve("", i5wd.s_cx_sql[1], ref i5wd.dw0[1], true);
                 //global.gu_dw1.f_dddwq_open(i5wd.dw0[1], tab_t1.tap01.dddw_t0105);
+                i5wd.dw0[1].SetGridStyle(windowName);
                 wtf_open_cb_resize();
                 //setpointer(arrow!)
                 ue_open9();

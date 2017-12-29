@@ -290,7 +290,7 @@ namespace Redsoft
                         sql = sql.Replace(":" + args[i].Name, "'" + s + "'");
                     i++;
                 }
-                MAction action = new MAction(sql);
+                MAction action = new MAction(sql, global.g5_sys.connStr);
                 DataTable dt = action.Select().ToDataTable();
                 bool firstRetrieve = false;
                 if (this.Controls.Find("panel1", true).Length == 0)
@@ -336,7 +336,7 @@ namespace Redsoft
                     iArg++;
                 }
 
-                using (MAction action = new MAction(sql))
+                using (MAction action = new MAction(sql, global.g5_sys.connStr))
                 {
                     if (hidePager)
                     {
@@ -401,7 +401,7 @@ namespace Redsoft
                         sql = freeForm.Sql.Replace(":" + args[i].Name, "'" + s + "'");
                     i++;
                 }
-                MAction action = new MAction(sql);
+                MAction action = new MAction(sql, global.g5_sys.connStr);
                 DataTable dt = action.Select().ToDataTable();
                 bool firstRetrieve = false;
                 if (this.Controls.Find("panel1", true).Length == 0)
@@ -445,7 +445,7 @@ namespace Redsoft
                     iArg++;
                 }
 
-                using (MAction action = new MAction(sql))
+                using (MAction action = new MAction(sql, global.g5_sys.connStr))
                 {
                     if (hidePager)
                     {
@@ -577,7 +577,7 @@ namespace Redsoft
             int count;
             try
             {
-                using (MAction action = new MAction(grid.Sql))
+                using (MAction action = new MAction(grid.Sql, global.g5_sys.connStr))
                 {
                     if (hidePager)
                         pagerControl1.PageSize = 1000;
@@ -626,7 +626,7 @@ namespace Redsoft
         public void SetGridStyle(string windowName)
         {
             dataGridView1.EnableHeadersVisualStyles = false;
-            MAction action = new MAction("mis_dw_argument");
+            MAction action = new MAction("mis_dw_argument", global.g5_sys.connStr);
             DataTable dt= action.Select("user_name1='"+ global.g5_sys.username +"' and window1='"+ windowName +"' and dataobject='"+ this.dataObject +"'").ToDataTable();
             if (dt.Rows.Count == 0)
                 dt = action.Select("user_name1='" + global.g5_sys.username + "' and window1='" + windowName + "' and dataobject=''").ToDataTable();
@@ -660,7 +660,8 @@ namespace Redsoft
                     dataGridView1.DefaultCellStyle.Font = new Font(detailfontfamily, Math.Abs(detailfontsize));
                 long detailheight = Common.GetLong(dt.Rows[0]["detail_height"]);
                 dataGridView1.RowTemplate.Height =(int) detailheight / 4;
-                if (Common.GetString(dt.Rows[0]["dw_2_3"]) == "2")
+                string dw_2_3 = Common.GetString(dt.Rows[0]["dw_2_3"]);
+                if (dw_2_3 == "2")
                 {
                    //奇偶列
                     long detailcolor1 = Common.GetLong(dt.Rows[0]["detail_color1"]);
@@ -676,6 +677,11 @@ namespace Redsoft
                     long detailfontcolor2 = Common.GetLong(dt.Rows[0]["detail_fontcolor2"]);
                     if (detailfontcolor2 != 0)
                         dataGridView1.DefaultCellStyle.ForeColor = ColorTranslator.FromWin32((int)detailfontcolor2);
+
+                }
+                else if (dw_2_3 == "3")
+                {
+                    //三列循环
 
                 }
             }
@@ -727,7 +733,7 @@ namespace Redsoft
             }
             string col = comboCol.SelectedValue.ToString();
 
-            MAction action = new MAction(grid.Sql);
+            MAction action = new MAction(grid.Sql, global.g5_sys.connStr);
             if (!action.Data.Columns.Contains(col))
                 return;
             SqlDbType dbtype = action.Data.Columns[col].SqlType;
@@ -813,7 +819,7 @@ namespace Redsoft
             {
                 if (!hidePager)
                 {
-                    MAction action = new MAction(grid.Sql);
+                    MAction action = new MAction(grid.Sql, global.g5_sys.connStr);
                     if (pagerControl1.RecordCount > 50000)
                     {
                         MessageBox.Show("记录数超过5万行，请分开导出！");
@@ -830,7 +836,7 @@ namespace Redsoft
 
         private void comboCol_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MAction action = new MAction(grid.Sql);
+            MAction action = new MAction(grid.Sql, global.g5_sys.connStr);
             comboRel.Items.Clear();
             string col = comboCol.SelectedValue.ToString();
             if (!action.Data.Columns.Contains(col))
@@ -1180,7 +1186,7 @@ namespace Redsoft
             //从数据库中删除
             if (DataWindowType == DataWindowTypes.Grid)
             {
-                using (MAction action = new MAction(TableName))
+                using (MAction action = new MAction(TableName, global.g5_sys.connStr))
                 {
                     DataGridViewRow r = dataGridView1.Rows[(int)row];
                     action.Fill(getWhere(r));
@@ -1195,7 +1201,7 @@ namespace Redsoft
             }
             else
             {
-                using (MAction action = new MAction(TableName))
+                using (MAction action = new MAction(TableName, global.g5_sys.connStr))
                 {
                     action.Fill("" + IdCol + "=" + row + "");
                     if (!action.Delete())
@@ -1237,7 +1243,7 @@ namespace Redsoft
             {
                 if (RowState == RowStatus.Add)
                 {
-                    using (MAction action = new MAction(TableName))
+                    using (MAction action = new MAction(TableName, global.g5_sys.connStr))
                     {
                         //从UI取值
                         string checkResult = Common.CheckValid(action, Controls[0], RowState, errorProvider1);
@@ -1262,7 +1268,7 @@ namespace Redsoft
                 }
                 else if (RowState == RowStatus.Edit)
                 {
-                    using (MAction action = new MAction(TableName))
+                    using (MAction action = new MAction(TableName, global.g5_sys.connStr))
                     {
                         action.Fill("" + IdCol + "=" + id + "");
                         Common.GetUIValue(action, Controls[0], RowState);
@@ -1287,7 +1293,7 @@ namespace Redsoft
                 {
                     if (Common.GetString(r.Tag) == "Add")
                     {
-                        using (MAction action = new MAction(TableName))
+                        using (MAction action = new MAction(TableName, global.g5_sys.connStr))
                         {
                             Common.GetUIValue(action, r);
                             if (!action.Insert())
@@ -1300,7 +1306,7 @@ namespace Redsoft
                     }
                     if (Common.GetString(r.Tag) == "Update")
                     {
-                        using (MAction action = new MAction(TableName))
+                        using (MAction action = new MAction(TableName, global.g5_sys.connStr))
                         {
                             Common.GetUIValue(action, r);
                             if (!action.Update())
@@ -1317,7 +1323,7 @@ namespace Redsoft
                 {
                     foreach (DataGridViewRow r in deletedRows)
                     {
-                        using (MAction action = new MAction(TableName))
+                        using (MAction action = new MAction(TableName, global.g5_sys.connStr))
                         {
                             action.Fill(getWhere(r));
                             if (!action.Delete())
@@ -1425,6 +1431,14 @@ namespace Redsoft
                 return ret;
             }
             return 0;
+        }
+        public void SetSort(string sort)
+        {
+
+        }
+        public void Sort()
+        {
+             
         }
     }
 }
