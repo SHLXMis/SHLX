@@ -217,7 +217,7 @@ namespace Redsoft
             sql += " group by " + colName;
 
             //DataSet ds = DBAccess.Query(sql);
-            using (MAction action = new MAction(sql,global.g5_sys.connStr))
+            using (MAction action = new MAction(sql, global.g5_sys.connStr))
             {
                 DataTable dt = action.Select().ToDataTable();
                 combo.DataSource = dt;
@@ -238,7 +238,7 @@ namespace Redsoft
                 sql += " where " + where;
             if (order != "")
                 sql += " order by " + order;
-            using (MAction action = new MAction(sql,global.g5_sys.connStr))
+            using (MAction action = new MAction(sql, global.g5_sys.connStr))
             {
                 System.Data.DataTable dt = action.Select().ToDataTable();
                 combo.DataSource = dt;
@@ -480,6 +480,7 @@ namespace Redsoft
 
         public static string GetMACByIP(string strIp)
         {
+            List<string> strList = new List<string>();
             NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
             //构造Ping实例
             Ping pingSender = new Ping();
@@ -501,6 +502,43 @@ namespace Redsoft
                 }
             }
             return string.Empty;
+        }
+
+        public static List<string> GetMacByIPConfig()
+        {
+            List<string> macs = new List<string>();
+            ProcessStartInfo startInfo = new ProcessStartInfo("ipconfig", "/all");
+            startInfo.UseShellExecute = false;
+            startInfo.RedirectStandardInput = true;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.RedirectStandardError = true;
+            startInfo.CreateNoWindow = true;
+            Process p = Process.Start(startInfo);
+            //截取输出流
+            StreamReader reader = p.StandardOutput;
+            string line = reader.ReadLine();
+
+            while (!reader.EndOfStream)
+            {
+                if (!string.IsNullOrEmpty(line))
+                {
+                    line = line.Trim();
+
+                    if (line.StartsWith("Physical Address"))
+                    {
+                        macs.Add(line);
+                    }
+                }
+
+                line = reader.ReadLine();
+            }
+
+            //等待程序执行完退出进程
+            p.WaitForExit();
+            p.Close();
+            reader.Close();
+
+            return macs;
         }
     }
 }
